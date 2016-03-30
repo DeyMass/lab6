@@ -20,7 +20,9 @@ return 0;
 int itog (int a,int b,int c){
 
 double* x;
+ int da;
 
+ 
 x=xcal ( dis(a,b,c) ,b,a);
 
 printf("%lf\n%lf",x[0],x[1]);
