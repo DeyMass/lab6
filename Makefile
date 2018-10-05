@@ -43,21 +43,3 @@ all: $(BIN_PATH)/$(BIN_NAME) $(BIN_PATH)/$(TEST_BIN_NAME)
 $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 	@echo "Linking: $@"
 	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
-
-$(BIN_PATH)/$(TEST_BIN_NAME): $(TEST_OBJECTS)
-	@echo "Linking: $@"
-	$(CC) $(TEST_OBJECTS) $(LDFLAGS) -o $@
-
-# Add dependency files, if they exist
--include $(DEPS)
-
-# Source file rules
-# After the first compilation they will be joined with the rules from the
-# dependency files to provide header dependencies
-$(BUILD_PATH)/$(SRC_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
-	@echo "Compiling: $< -> $@"
-	$(CC) $(CFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
-
-$(BUILD_PATH)/$(TEST_PATH)/%.o: $(TEST_PATH)/%.$(SRC_EXT)
-	@echo "Compiling: $< -> $@"
-	$(CC) $(CFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
